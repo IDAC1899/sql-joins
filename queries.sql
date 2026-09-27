@@ -57,3 +57,45 @@ SELECT name, city FROM ice_creams FULL OUTER JOIN plants ON ice_creams.id = plan
 
 -- every combination
 SELECT * FROM ice_creams CROSS JOIN plants;
+
+-- rename each flavor after the city where it was first made
+ALTER TABLE ice_creams ADD COLUMN description TEXT;
+-- update Plain to The Stamford
+UPDATE ice_creams SET name = 'The Stamford', description = 'Plain' WHERE name = 'Plain';
+-- update Blueberry to The Bridgeport
+UPDATE ice_creams SET name = 'The Bridgeport', description = 'Blueberry' WHERE name = 'Blueberry';
+-- update Strawberry to The Danbury
+UPDATE ice_creams SET name = 'The Danbury', description = 'Strawberry ' WHERE name = 'Strawberry';
+-- update Peanut butter to The Fairfield
+UPDATE ice_creams SET name = 'The Fairfield', description = 'Peanut Butter' WHERE name = 'Peanut Butter';
+-- update Vanilla to The Signature Connecticut
+UPDATE ice_creams SET name = 'The Signature Connecticut', description = 'Vanilla' WHERE name = 'Vanilla';
+
+-- previous queries still work after the renames
+SELECT city, name, description FROM ice_creams FULL OUTER JOIN plants ON ice_creams.id = plants.ice_cream_id;
+
+-- average pints of The Danbury
+SELECT
+  AVG(pints)
+FROM
+  plants
+INNER JOIN
+  ice_creams
+ON
+ plants.ice_cream_id = ice_creams.id
+WHERE
+  name = 'The Danbury';
+
+-- berry recall: find all the plants using berries
+SELECT
+  city
+FROM
+  plants
+INNER JOIN
+  ice_creams
+ON
+ plants.ice_cream_id = ice_creams.id
+WHERE description LIKE '%berry%';
+
+-- You do: all the cities that have not passed inspection
+SELECT city FROM plants WHERE passed = false;
