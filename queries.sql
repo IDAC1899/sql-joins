@@ -159,3 +159,18 @@ INNER JOIN
 ON
  ingredients.id = ice_creams_ingredients.ingredient_id
 ORDER BY name, ingredient;
+
+-- You do: cities where strawberries need to be shipped
+SELECT
+  city
+FROM
+  plants
+INNER JOIN
+  ice_creams_ingredients
+ON
+  plants.ice_cream_id = ice_creams_ingredients.ice_cream_id
+INNER JOIN
+  ingredients
+ON
+  ingredients.id = ice_creams_ingredients.ingredient_id
+WHERE ingredients.ingredient = 'strawberry';
