@@ -38,3 +38,22 @@ INSERT INTO plants (city, pints_made, passed, ice_cream_id) VALUES
 
 
 SELECT * FROM plants;
+
+-- Joins
+-- ice cream being produced at plants
+SELECT * FROM ice_creams JOIN plants ON plants.ice_cream_id = ice_creams.id;
+
+-- all the ice creams, whether or not they are at a plant
+SELECT * FROM ice_creams LEFT JOIN plants ON plants.ice_cream_id = ice_creams.id;
+
+-- all the plants, whether or not they are producing any ice cream
+SELECT * FROM ice_creams RIGHT JOIN plants ON ice_creams.id = plants.ice_cream_id;
+
+-- all the things
+SELECT * FROM ice_creams FULL OUTER JOIN plants ON ice_creams.id = plants.ice_cream_id;
+
+-- just the ice creams and cities
+SELECT name, city FROM ice_creams FULL OUTER JOIN plants ON ice_creams.id = plants.ice_cream_id;
+
+-- every combination
+SELECT * FROM ice_creams CROSS JOIN plants;
